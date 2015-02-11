@@ -5,19 +5,25 @@ function getPlayerCells(playerNum) {
 
 function getPlayerPosition(playerNum) {
   var playerCells = getPlayerCells(playerNum);
-  Array.prototype.forEach.call( playerCells, function(cell, index) {
-    if (cell.classList.contains("active") == true) {
-      console.log("hello");
-      console.log(index);
+  // Array.prototype.forEach.call( playerCells, function(cell, index) {
+  //   if (cell.classList.contains("active") === true) {
+  //     console.log("hello");
+  //     index;
+  //   }
+  // });
+  for( var index = 0; index < playerCells.length - 1; index++ ) {
+    if (playerCells[index].classList.contains("active") === true) {
+      return index;
     }
-  });
+  }
 }
 
 function updatePlayerPosition(playerNum, position) {
   var playerCells = getPlayerCells(playerNum);
-
+  var currentPosition = getPlayerPosition(playerNum);
+  var nextPosition = currentPosition + 1;
   Array.prototype.forEach.call( playerCells,(function(cell, index) {
-    if (index == position) {
+    if (index == nextPosition) {
       cell.className = "active";
     }
     else {
@@ -28,12 +34,10 @@ function updatePlayerPosition(playerNum, position) {
 
 function movePlayer(event) {
   if (event.keyCode == 90 ) { // 'z'
-    getPlayerPosition(1);
-    updatePlayerPosition(1, 5);
+    updatePlayerPosition(1);
   }
   else { (event.keyCode == 77)  // 'm'
-    getPlayerPosition(2);
-    updatePlayerPosition(2, 5);
+    updatePlayerPosition(2);
   }
 }
 
